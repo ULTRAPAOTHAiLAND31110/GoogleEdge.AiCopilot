@@ -10,6 +10,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 import os
 from pathlib import Path
+from src.config import API_KEY
 
 app = FastAPI(title="Mergington High School API",
               description="API for viewing and signing up for extracurricular activities")
@@ -65,3 +66,9 @@ def signup_for_activity(activity_name: str, email: str):
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
+
+
+@app.get("/apikey")
+def get_api_key():
+    """Endpoint สำหรับตรวจสอบค่า API Key (ตัวอย่าง)"""
+    return {"api_key": API_KEY}
